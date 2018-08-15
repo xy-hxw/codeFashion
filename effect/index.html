@@ -100,7 +100,7 @@
 		// Potentially, we can extract the vertices or faces of the text to generate particles too.
 		// Geo > Vertices > Position
 
-		text.position.x = centerOffset;
+		text.position.x = centerOffset+30;
 		text.position.y = 100;
 		text.position.z = 0;
 
@@ -227,6 +227,8 @@
 		//
 
 		window.addEventListener('resize', onWindowResize, false);
+		
+		setInterval("changeColor()",600);
 
 	}
 
@@ -328,7 +330,44 @@
 		group.rotation.y += (targetRotation - group.rotation.y) * 0.05;
 		renderer.render(scene, camera);
 	}
+	
+	function changeColor(){
+		
+		var string = "sarrol";
+		var hash = document.location.hash.substr(1);
 
+		if (hash.length !== 0) {
+
+			string = hash;
+
+		}
+
+		var text3d = new THREE.TextGeometry(string, {
+			size: 80,
+			height: 20,
+			curveSegments: 2,
+			font: "helvetiker"
+
+		});
+
+		text3d.computeBoundingBox();
+		var centerOffset = -0.5 * (text3d.boundingBox.max.x - text3d.boundingBox.min.x);
+
+		var textMaterial = new THREE.MeshBasicMaterial({color: Math.random() * 0xffffff, overdraw: 0.5});
+
+		text = new THREE.Mesh(text3d, textMaterial);
+
+		text.position.x = centerOffset+30;
+		text.position.y = 100;
+		text.position.z = 0;
+
+		text.rotation.x = 0;
+		text.rotation.y = Math.PI * 2;
+
+		group.add(text);
+
+
+	}
 </script>
 
 <div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
