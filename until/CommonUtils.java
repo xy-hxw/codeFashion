@@ -197,4 +197,41 @@ public class CommonUtils {
 		String s = gson.toJson(map);
 		System.out.println(s);
 	}
+	/**
+	 * 将时间加多少时间
+	 * @param time 时间 
+	 * @param num  加多少(整数加，负数减)
+	 * @param type 加的时间类型(秒,分,时,天,周,月,年)
+	 * @param style 返回的时间格式
+	 * @return
+	 */
+	public static String addTime(String time, int num, String type, String style){
+		if(null == style || "".equals(style)){
+			style = "yyyy-MM-dd HH:mm:ss";
+		}
+		 SimpleDateFormat format = new SimpleDateFormat(style);
+		 try {
+			Date date = format.parse(time);
+			Calendar calendar = Calendar.getInstance ();
+			calendar.setTime(date);
+			if("second".equals(type)){
+				calendar.add (Calendar.SECOND, num);
+			}else if("minute".equals(type)){
+				calendar.add (Calendar.MINUTE, num);
+			}else if("hour".equals(type)){
+				calendar.add (Calendar.HOUR, num);
+			}else if("day".equals(type)){
+				calendar.add (Calendar.DATE, num);
+			}else if("week".equals(type)){
+				calendar.add (Calendar.WEEK_OF_YEAR, num);
+			}else if("month".equals(type)){
+				calendar.add (Calendar.MONTH, num);
+			}else if("year".equals(type)){
+				calendar.add (Calendar.YEAR, num);
+			}
+			return format.format(calendar.getTime ());
+		} catch (ParseException e) {
+			return null;
+		}
+	}
 }
