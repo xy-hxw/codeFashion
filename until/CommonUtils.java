@@ -234,4 +234,45 @@ public class CommonUtils {
 			return null;
 		}
 	}
+	/**
+	 * 起始日期，结束日期
+	 * 日期均不能为空，并且结束日期大于等于开始日期
+	 * @param startTime
+	 * @param endTime
+	 * @param style  yyyy-MM-dd  yyyy-MM   yyyy
+	 * @return
+	 */
+	public static List<String> loadDate(String startTime, String endTime, String style) {
+		if(null==startTime || "".equals(startTime) || null==endTime || "".equals(endTime)){
+			return null;
+		}
+		Calendar startDay = Calendar.getInstance();  
+		Calendar endDay = Calendar.getInstance();
+		DateFormat format = new SimpleDateFormat(style); 
+		try {
+			startDay.setTime(format.parse(startTime));
+			endDay.setTime(format.parse(endTime)); 
+		} catch (ParseException e) {
+			return null;
+		}
+		List<String> list = new ArrayList<String>();
+		if (startDay.compareTo(endDay) > 0) {
+			return null;  
+		}else{
+			list.add(format.format(endDay.getTime()));
+		}
+		Calendar currentPrintDay = endDay;
+		while (currentPrintDay.compareTo(startDay)>0) {  
+			//日期加一
+			if("yyyy-MM-dd".equals(style)){
+				currentPrintDay.set(Calendar.DATE, currentPrintDay.get(Calendar.DATE) - 1);
+			}else if("yyyy-MM".equals(style)){
+				currentPrintDay.set(Calendar.MONTH, currentPrintDay.get(Calendar.MONTH) - 1);
+			}else if("yyyy".equals(style)){
+				currentPrintDay.set(Calendar.YEAR, currentPrintDay.get(Calendar.YEAR) - 1);
+			}
+			list.add(format.format(currentPrintDay.getTime()));
+		}
+		return list;
+	}
 }
