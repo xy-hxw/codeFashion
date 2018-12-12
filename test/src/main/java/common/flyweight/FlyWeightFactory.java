@@ -22,6 +22,12 @@ public class FlyWeightFactory {
         map.put(state, flyWeightI);
         return flyWeightI;
     }
+
+    /**
+     * 复合享元工厂方法
+     * @param states
+     * @return
+     */
     public FlyWeightI factory(List<Character> states) {
         FlyWeightComplex flyWeightI = new FlyWeightComplex();
         if (null != states) {

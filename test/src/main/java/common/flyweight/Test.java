@@ -23,6 +23,9 @@ import java.util.List;
  *  2：单例模式主要为了共享数据，享元模式主要为了节约内存空间
  */
 public class Test {
+    /**
+     * 单纯享元模式
+     */
     public static void test() {
         FlyWeightFactory flyWeightFactory = new FlyWeightFactory();
         FlyWeightI a = flyWeightFactory.factory('a');
@@ -32,7 +35,11 @@ public class Test {
         FlyWeightI c = flyWeightFactory.factory('a');
         c.operation("three test");
     }
-    public static void test1() {
+
+    /**
+     * 复合享元模式
+     */
+    private static void test1() {
         List<Character> states = new ArrayList<>();
         states.add('a');
         states.add('b');
@@ -53,7 +60,7 @@ public class Test {
         System.out.println("单纯享元模式是否相等="+(factory3 == factory4));
     }
     public static void main(String[] args) {
-//        test();
+        test();
         test1();
     }
 }
