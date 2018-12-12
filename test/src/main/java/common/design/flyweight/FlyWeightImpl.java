@@ -1,11 +1,11 @@
-package common.flyweight;
+package common.design.flyweight;
 
 /**
  * @Author huoxianwei
  * @Date 2018/12/12 16:22
  * @Description 单纯享元模式
  */
-public class FlyWeightImpl implements FlyWeightI{
+public class FlyWeightImpl implements FlyWeightI {
 
     private Character initState;
 

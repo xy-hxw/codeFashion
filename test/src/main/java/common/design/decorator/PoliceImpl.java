@@ -1,4 +1,4 @@
-package common.design.Decorator;
+package common.design.decorator;
 
 public class PoliceImpl implements Worker{
 

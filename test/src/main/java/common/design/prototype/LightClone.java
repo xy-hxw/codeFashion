@@ -1,15 +1,17 @@
 package common.design.prototype;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *浅度克隆
- *如果克隆的类中的引用对象时(String, Integer等封装类除外)，克隆出来的类中引用对象储存的还是之前的内存地址
+ * 原型模式
+ *
+ * 浅度克隆
+ * 如果克隆的类中的引用对象时(String, Integer等封装类除外)，克隆出来的类中引用对象储存的还是之前的内存地址
  */
 @Data
 @NoArgsConstructor

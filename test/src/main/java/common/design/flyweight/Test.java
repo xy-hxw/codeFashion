@@ -1,4 +1,4 @@
-package common.flyweight;
+package common.design.flyweight;
 
 import java.util.ArrayList;
 import java.util.List;

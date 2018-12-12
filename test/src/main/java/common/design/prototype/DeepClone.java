@@ -1,13 +1,15 @@
 package common.design.prototype;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
+ * 原型模式
+ *
  * 深度克隆
  *
  */

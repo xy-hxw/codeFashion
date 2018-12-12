@@ -1,10 +1,12 @@
 总体来说设计模式分为三大类：
 
 创建型模式，共五种：
-        工厂方法模式、抽象工厂模式、单例模式、建造者模式、原型模式。
+        工厂方法模式-simpleFactory、抽象工厂模式-simpleFactory、单例模式-singleton、
+        建造者模式-builderPattern、原型模式-prototype
 
 结构型模式，共七种：
-        适配器模式、装饰器模式、代理模式、外观模式、桥接模式、组合模式、享元模式。
+        适配器模式-adaptor、装饰器模式-decorator、代理模式-proxy、
+        外观模式-facade、桥接模式-bridge、组合模式-composite、享元模式-flyweight
 
 行为型模式，共十一种：
         策略模式、模板方法模式、观察者模式、迭代子模式、责任链模式、命令模式、备忘录模式、

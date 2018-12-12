@@ -1,4 +1,4 @@
-package common.flyweight;
+package common.design.flyweight;
 
 /**
  * @Author huoxianwei

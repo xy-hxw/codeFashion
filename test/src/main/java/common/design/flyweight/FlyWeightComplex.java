@@ -1,4 +1,4 @@
-package common.flyweight;
+package common.design.flyweight;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,7 +8,7 @@ import java.util.Map;
  * @Date 2018/12/12 16:44
  * @Description 复合享元
  */
-public class FlyWeightComplex implements FlyWeightI{
+public class FlyWeightComplex implements FlyWeightI {
     private Map<Character, FlyWeightI> map = new HashMap<>();
 
     /**

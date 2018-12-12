@@ -1,4 +1,4 @@
-package common.flyweight;
+package common.design.flyweight;
 
 import java.util.HashMap;
 import java.util.List;
