@@ -1,7 +1,5 @@
 package common.design.bridge;
 
-import javax.imageio.ImageIO;
-
 /**
  *  桥接模式
  *  1：实现了抽象和实现部分的分离
