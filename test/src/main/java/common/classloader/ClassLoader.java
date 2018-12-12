@@ -1,7 +1,7 @@
 package common.classloader;
 
 public interface ClassLoader {
-	public void inter();
+	void inter();
 	default void inter1() {
 		System.out.println("这是接口的【default】方法");
 	};

@@ -1,5 +1,8 @@
 package common.design.adaptor;
 
+/**
+ *  适配器模式
+ */
 public class Test {
 	/**
 	 * 类适配器
