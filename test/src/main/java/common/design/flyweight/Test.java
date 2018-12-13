@@ -8,7 +8,7 @@ import java.util.List;
  * @Date 2018/12/12 16:08
  * @Description 享元模式
  *
- * jdk 中String使用的享元模式
+ * jdk 中Integer(缓存)，String使用的享元模式
  *  1：享元模式包含内蕴状态和外蕴状态
  *  2：享元工厂确保合理的共享享元对象
  * 优点：
