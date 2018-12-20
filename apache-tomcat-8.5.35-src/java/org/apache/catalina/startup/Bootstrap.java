@@ -63,6 +63,7 @@ public final class Bootstrap {
 
     static {
         // Will always be non-null
+        log.info("bootstrap  static 加载");
         String userDir = System.getProperty("user.dir");
 
         // Home first
@@ -122,6 +123,9 @@ public final class Bootstrap {
         }
         System.setProperty(
                 Globals.CATALINA_BASE_PROP, catalinaBaseFile.getPath());
+        log.info("bootstrap  static 加载完成");
+        log.info("Globals.CATALINA_HOME_PROP = tomcat根目录="+catalinaHomeFile.getPath());
+        log.info("Globals.CATALINA_BASE_PROP = tomcat根目录="+catalinaBaseFile.getPath());
     }
 
     // -------------------------------------------------------------- Variables
@@ -142,6 +146,7 @@ public final class Bootstrap {
 
 
     private void initClassLoaders() {
+        log.info("初始化类加载器");
         try {
             commonLoader = createClassLoader("common", null);
             if( commonLoader == null ) {
@@ -155,6 +160,7 @@ public final class Bootstrap {
             log.error("Class loader creation threw exception", t);
             System.exit(1);
         }
+        log.info("初始化类加载器完成");
     }
 
 
@@ -253,7 +259,8 @@ public final class Bootstrap {
      * @throws Exception Fatal initialization error
      */
     public void init() throws Exception {
-
+        log.info("开始初始化类加载器");
+        // 初始化类加载器
         initClassLoaders();
 
         Thread.currentThread().setContextClassLoader(catalinaLoader);
@@ -275,11 +282,11 @@ public final class Bootstrap {
         Object paramValues[] = new Object[1];
         paramValues[0] = sharedLoader;
         Method method =
-            startupInstance.getClass().getMethod(methodName, paramTypes);
+                startupInstance.getClass().getMethod(methodName, paramTypes);
         method.invoke(startupInstance, paramValues);
-
         catalinaDaemon = startupInstance;
-
+        log.info("通过 Catalina类反射调用setParentClassLoader设置类加载器");
+        log.info("catalinaDaemon 为Catalina类的一个实例");
     }
 
 
@@ -287,7 +294,7 @@ public final class Bootstrap {
      * Load daemon.
      */
     private void load(String[] arguments)
-        throws Exception {
+            throws Exception {
 
         // Call the load() method
         String methodName = "load";
@@ -303,9 +310,11 @@ public final class Bootstrap {
             param[0] = arguments;
         }
         Method method =
-            catalinaDaemon.getClass().getMethod(methodName, paramTypes);
-        if (log.isDebugEnabled())
+                catalinaDaemon.getClass().getMethod(methodName, paramTypes);
+        if (log.isDebugEnabled()) {
             log.debug("Calling startup class " + method);
+        }
+        log.info("反射调用 Catalina 的 load 方法");
         method.invoke(catalinaDaemon, param);
 
     }
@@ -455,7 +464,8 @@ public final class Bootstrap {
      * @param args Command line arguments to be processed
      */
     public static void main(String args[]) {
-
+        log.info("bootstrap main 启动");
+        // daemon为守护线程
         if (daemon == null) {
             // Don't set daemon until init() has completed
             Bootstrap bootstrap = new Bootstrap();

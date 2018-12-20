@@ -58,7 +58,7 @@ public class CatalinaProperties {
      * Load properties.
      */
     private static void loadProperties() {
-
+        log.info("加载启动的配置文件");
         InputStream is = null;
         try {
             String configUrl = System.getProperty("catalina.config");
@@ -71,6 +71,7 @@ public class CatalinaProperties {
 
         if (is == null) {
             try {
+                log.info("责任链设计模式查找配置文件 catalina.properties");
                 File home = new File(Bootstrap.getCatalinaBase());
                 File conf = new File(home, "conf");
                 File propsFile = new File(conf, "catalina.properties");
@@ -117,6 +118,7 @@ public class CatalinaProperties {
         while (enumeration.hasMoreElements()) {
             String name = (String) enumeration.nextElement();
             String value = properties.getProperty(name);
+            log.info("默认配置项 :"+name+"="+value);
             if (value != null) {
                 System.setProperty(name, value);
             }
