@@ -275,7 +275,7 @@ public class Catalina {
      * @return the main digester to parse server.xml
      */
     protected Digester createStartDigester() {
-        log.info("加载server.xml");
+        log.info("加载server.xml, 实例化各参数");
         long t1=System.currentTimeMillis();
         // Initialize the digester
         Digester digester = new Digester();
@@ -408,7 +408,6 @@ public class Catalina {
         digester.addRule("Server/Service/Engine",
                          new SetParentClassLoaderRule(parentClassLoader));
         addClusterRuleSet(digester, "Server/Service/Engine/Cluster/");
-
         long t2=System.currentTimeMillis();
         if (log.isDebugEnabled()) {
             log.debug("Digester for server.xml created " + ( t2-t1 ));
@@ -604,11 +603,12 @@ public class Catalina {
                 }
                 return;
             }
-
             try {
                 inputSource.setByteStream(inputStream);
                 digester.push(this);
+                log.info("解析server.xml");
                 digester.parse(inputSource);
+                log.info("解析server.xml完成："+getServer().hashCode());
             } catch (SAXParseException spe) {
                 log.warn("Catalina.start using " + getConfigFile() + ": " +
                         spe.getMessage());
@@ -626,7 +626,6 @@ public class Catalina {
                 }
             }
         }
-
         getServer().setCatalina(this);
         getServer().setCatalinaHome(Bootstrap.getCatalinaHomeFile());
         getServer().setCatalinaBase(Bootstrap.getCatalinaBaseFile());
@@ -636,7 +635,7 @@ public class Catalina {
 
         // Start the new server
         try {
-            log.info("初始化 StandardServer server");
+            log.info("在StandardServer构造方法,初始化 StandardServer server");
             getServer().init();
         } catch (LifecycleException e) {
             if (Boolean.getBoolean("org.apache.catalina.startup.EXIT_ON_INIT_FAILURE")) {

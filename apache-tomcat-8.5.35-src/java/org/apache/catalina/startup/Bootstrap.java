@@ -514,8 +514,7 @@ public final class Bootstrap {
                 System.exit(0);
             } else {
                 log.warn("Bootstrap: command \"" + command + "\" does not exist.");
-            }
-        } catch (Throwable t) {
+            } } catch (Throwable t) {
             // Unwrap the Exception for clearer error reporting
             if (t instanceof InvocationTargetException &&
                     t.getCause() != null) {

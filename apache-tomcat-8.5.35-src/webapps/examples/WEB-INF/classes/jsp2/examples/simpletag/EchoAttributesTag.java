@@ -19,7 +19,7 @@
 package jsp2.examples.simpletag;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;

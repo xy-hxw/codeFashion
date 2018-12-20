@@ -98,6 +98,7 @@ public abstract class LifecycleBase implements Lifecycle {
 
     @Override
     public final synchronized void init() throws LifecycleException {
+        log.info("容器初始化方法，通过钩子函数initInternal子类重写初始化流程");
         if (!state.equals(LifecycleState.NEW)) {
             invalidTransition(Lifecycle.BEFORE_INIT_EVENT);
         }
@@ -122,7 +123,7 @@ public abstract class LifecycleBase implements Lifecycle {
      */
     @Override
     public final synchronized void start() throws LifecycleException {
-
+        log.info("容器开始启动......");
         if (LifecycleState.STARTING_PREP.equals(state) || LifecycleState.STARTING.equals(state) ||
                 LifecycleState.STARTED.equals(state)) {
 
@@ -159,6 +160,7 @@ public abstract class LifecycleBase implements Lifecycle {
             } else {
                 setStateInternal(LifecycleState.STARTED, null, false);
             }
+            log.info("更新容器状态为已经启动......");
         } catch (Throwable t) {
             // This is an 'uncontrolled' failure so put the component into the
             // FAILED state and throw an exception.
