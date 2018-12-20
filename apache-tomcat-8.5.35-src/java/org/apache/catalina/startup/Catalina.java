@@ -275,6 +275,7 @@ public class Catalina {
      * @return the main digester to parse server.xml
      */
     protected Digester createStartDigester() {
+        log.info("加载server.xml");
         long t1=System.currentTimeMillis();
         // Initialize the digester
         Digester digester = new Digester();
@@ -635,6 +636,7 @@ public class Catalina {
 
         // Start the new server
         try {
+            log.info("初始化 StandardServer server");
             getServer().init();
         } catch (LifecycleException e) {
             if (Boolean.getBoolean("org.apache.catalina.startup.EXIT_ON_INIT_FAILURE")) {
@@ -670,7 +672,7 @@ public class Catalina {
      * Start a new server instance.
      */
     public void start() {
-
+        Server server = getServer();
         if (getServer() == null) {
             load();
         }

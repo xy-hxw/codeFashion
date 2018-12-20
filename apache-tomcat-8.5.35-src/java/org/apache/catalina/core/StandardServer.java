@@ -463,9 +463,12 @@ public final class StandardServer extends LifecycleMBeanBase implements Server {
                     InputStream stream;
                     long acceptStartTime = System.currentTimeMillis();
                     try {
+                        log.info("开始接受请求");
                         socket = serverSocket.accept();
+                        log.info("接受到请求");
                         socket.setSoTimeout(10 * 1000);  // Ten seconds
                         stream = socket.getInputStream();
+                        log.info("接受的请求为 stream"+stream.toString());
                     } catch (SocketTimeoutException ste) {
                         // This should never happen but bug 56684 suggests that
                         // it does.
