@@ -158,6 +158,7 @@ public class Nio2Endpoint extends AbstractJsseEndpoint<Nio2Channel> {
         }
 
         // Initialize SSL if needed
+        log.info("初始化ssl");
         initialiseSsl();
     }
 
@@ -167,7 +168,7 @@ public class Nio2Endpoint extends AbstractJsseEndpoint<Nio2Channel> {
      */
     @Override
     public void startInternal() throws Exception {
-
+        log.info("Nio2Endpoint 的startInternal");
         if (!running) {
             allClosed = false;
             running = true;

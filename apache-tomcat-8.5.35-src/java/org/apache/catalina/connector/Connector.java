@@ -75,6 +75,7 @@ public class Connector extends LifecycleMBeanBase  {
         // Instantiate protocol handler
         ProtocolHandler p = null;
         try {
+            log.info("Connector 构造函数中初始化ProtocolHandler（Http11NioProtocol）");
             Class<?> clazz = Class.forName(protocolHandlerClassName);
             p = (ProtocolHandler) clazz.getConstructor().newInstance();
         } catch (Exception e) {
@@ -584,14 +585,18 @@ public class Connector extends LifecycleMBeanBase  {
 
         if ("HTTP/1.1".equals(protocol) || protocol == null) {
             if (aprConnector) {
+                log.info("通过  Http11AprProtocol");
                 setProtocolHandlerClassName("org.apache.coyote.http11.Http11AprProtocol");
             } else {
+                log.info("通过nio  Http11NioProtocol");
                 setProtocolHandlerClassName("org.apache.coyote.http11.Http11NioProtocol");
             }
         } else if ("AJP/1.3".equals(protocol)) {
             if (aprConnector) {
+                log.info("通过  AjpAprProtocol");
                 setProtocolHandlerClassName("org.apache.coyote.ajp.AjpAprProtocol");
             } else {
+                log.info("通过nio  AjpNioProtocol");
                 setProtocolHandlerClassName("org.apache.coyote.ajp.AjpNioProtocol");
             }
         } else {
@@ -990,6 +995,7 @@ public class Connector extends LifecycleMBeanBase  {
         }
 
         try {
+            log.info("protocolHandler 开始初始化");
             protocolHandler.init();
         } catch (Exception e) {
             throw new LifecycleException(
@@ -1015,6 +1021,7 @@ public class Connector extends LifecycleMBeanBase  {
         setState(LifecycleState.STARTING);
 
         try {
+            log.info("调用protocolHandler.start() 区分是否是http or ajp 协议");
             protocolHandler.start();
         } catch (Exception e) {
             throw new LifecycleException(

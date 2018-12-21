@@ -104,6 +104,7 @@ public class AprLifecycleListener
         //https://bz.apache.org/bugzilla/show_bug.cgi?id=48613
         if (instanceCreated) {
             synchronized (lock) {
+                log.info("通过init方法设置aprAvailable=true");
                 init();
             }
         }
@@ -111,6 +112,7 @@ public class AprLifecycleListener
     }
 
     public AprLifecycleListener() {
+        log.info("AprLifecycleListener构造函数设置 instanceCreated = true");
         instanceCreated = true;
     }
 

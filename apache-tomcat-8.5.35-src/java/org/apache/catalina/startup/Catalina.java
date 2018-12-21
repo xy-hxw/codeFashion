@@ -671,7 +671,6 @@ public class Catalina {
      * Start a new server instance.
      */
     public void start() {
-        Server server = getServer();
         if (getServer() == null) {
             load();
         }

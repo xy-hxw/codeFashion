@@ -915,7 +915,8 @@ public abstract class ContainerBase extends LifecycleMBeanBase
      */
     @Override
     protected synchronized void startInternal() throws LifecycleException {
-
+        log.info("ContainerBase 的 startInternal()方法");
+        log.info("调用startStopExecutor.submit(new StartChild(children[i]))进行异步初始化");
         // Start our subordinate components, if any
         logger = null;
         getLogger();
@@ -963,6 +964,7 @@ public abstract class ContainerBase extends LifecycleMBeanBase
         setState(LifecycleState.STARTING);
 
         // Start our thread
+        log.info("调用了threadStart，StandardEngine线程启动");
         threadStart();
     }
 
@@ -1420,6 +1422,7 @@ public abstract class ContainerBase extends LifecycleMBeanBase
 
         @Override
         public Void call() throws LifecycleException {
+            log.info("异步线程调用的 call()");
             child.start();
             return null;
         }
