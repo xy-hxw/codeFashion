@@ -23,7 +23,9 @@ import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -63,7 +65,6 @@ public final class Bootstrap {
 
     static {
         // Will always be non-null
-        log.info("bootstrap  static 加载");
         String userDir = System.getProperty("user.dir");
 
         // Home first
@@ -123,9 +124,6 @@ public final class Bootstrap {
         }
         System.setProperty(
                 Globals.CATALINA_BASE_PROP, catalinaBaseFile.getPath());
-        log.info("bootstrap  static 加载完成");
-        log.info("Globals.CATALINA_HOME_PROP = tomcat根目录="+catalinaHomeFile.getPath());
-        log.info("Globals.CATALINA_BASE_PROP = tomcat根目录="+catalinaBaseFile.getPath());
     }
 
     // -------------------------------------------------------------- Variables
@@ -146,7 +144,6 @@ public final class Bootstrap {
 
 
     private void initClassLoaders() {
-        log.info("初始化类加载器");
         try {
             commonLoader = createClassLoader("common", null);
             if( commonLoader == null ) {
@@ -160,7 +157,6 @@ public final class Bootstrap {
             log.error("Class loader creation threw exception", t);
             System.exit(1);
         }
-        log.info("初始化类加载器完成");
     }
 
 
@@ -464,8 +460,7 @@ public final class Bootstrap {
      * @param args Command line arguments to be processed
      */
     public static void main(String args[]) {
-        log.info("bootstrap main 启动");
-        // daemon为守护线程
+
         if (daemon == null) {
             // Don't set daemon until init() has completed
             Bootstrap bootstrap = new Bootstrap();
@@ -514,7 +509,8 @@ public final class Bootstrap {
                 System.exit(0);
             } else {
                 log.warn("Bootstrap: command \"" + command + "\" does not exist.");
-            } } catch (Throwable t) {
+            }
+        } catch (Throwable t) {
             // Unwrap the Exception for clearer error reporting
             if (t instanceof InvocationTargetException &&
                     t.getCause() != null) {

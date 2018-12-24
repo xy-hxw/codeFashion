@@ -1,22 +1,22 @@
 package common;
 
+import com.alibaba.fastjson.JSON;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import com.alibaba.fastjson.JSON;
-
 public class Test {
 	public static void testList() {
-		List<String> list = new ArrayList<String>();
+		List<String> list = new ArrayList<>();
 		list.add("d");
 		list.add("b");
 		list.add("a");
 		list.add("c");
-		list.parallelStream().forEach(key->System.out.print(key));
+		list.parallelStream().forEach(System.out::println);
 		System.out.println();
-		list.stream().forEach(key->System.out.print(key));
+		list.forEach(System.out::println);
 		System.out.println();
-		list.forEach(key->System.out.print(key));
+		list.forEach(System.out::println);
 		System.out.println();
 		list.forEach(System.out::print);
 	}
@@ -31,7 +31,7 @@ public class Test {
 	public void test1() {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < 5; i++) {
-			sb.append("str"+i);
+			sb.append("str").append(i);
 		}
 		String str = "";
 		for (int i = 0; i < 5; i++) {
@@ -39,10 +39,27 @@ public class Test {
 		}
 		
 	}
+
+	public static void test2() {
+		String test2 = "public pointcut mostSpecificSubTypeConstruction() : if (thisJoinPoint.getSignature().getDeclaringType()==thisJoinPoint.getThis().getClass());";
+		char[] chars_test2 = test2.toCharArray();
+		for (int i = 0; i < chars_test2.length; i++) {
+			String temp = String.valueOf(chars_test2[i]);
+			// 判断是全角字符
+			if (temp.matches("[^\\x00-\\xff]")) {
+				System.out.println("全角   " + temp);
+			}
+			// 判断是半角字符
+			else {
+//				System.out.println("半角    " + temp);
+			}
+		}
+	}
 	public static void main(String[] args) {
-		//testList();
+		testList();
 		String property = System.getProperty("user.dir");
 		System.out.println(property);
 		testSplit();
+		test2();
 	}
 }
