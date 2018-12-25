@@ -23,6 +23,7 @@ public class Test {
         int calculate1 = environment1.calculate(5, 10);
         System.out.println(calculate1);
     }
+
     public static void main(String[] args) {
         test();
         test1();
