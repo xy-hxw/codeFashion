@@ -2,6 +2,12 @@ package common.algorithm.shortcode;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  * @Author huoxianwei
  * @Date 2018/12/25 11:38
@@ -9,7 +15,8 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class ShortId {
 
-    private static final String CODE = "0123456789ABCDEFGHIJKLMNOPKRSTUVWXYZ";
+    private static String CODE = "0123456789ABCDEFGHIJKLMNOPKRSTUVWXYZ";
+
 
     /**
      * 十进制转为36进制
@@ -50,12 +57,33 @@ public class ShortId {
         return sum;
     }
 
+    /**
+     * 获取一个4位随机数
+     */
+    public static String randomNum() {
+        String str = "0123456789abcdefghijklmnopqrstuvwxyz";
+        List<String> rlist = new ArrayList<>(Arrays.asList(str.split("")));
+        StringBuilder sb = new StringBuilder();
+        int size = rlist.size();
+        for (int i = 1; i <= 36; i++) {
+            int index = ThreadLocalRandom.current().nextInt(size);
+            sb.append(rlist.get(index));
+            rlist.remove(index);
+            size = size - 1;
+        }
+        return sb.toString();
+    }
+
+
     public static void main(String[] args) {
-        long id = 236146700000L;
+        // 46656  1679615
+        CODE = randomNum();
+        Long random = ThreadLocalRandom.current().nextLong(46656L, 1679615L);
         int num = 36;
-        String str = createId(id, num);
-        System.out.println(str);
+        String str = createId(random, num);
         Integer integer = parseId(str, num);
-        System.out.println(integer);
+        String uuid = UUID.randomUUID().toString().replace("-", "");
+        uuid = str + uuid;
+        System.out.println(uuid);
     }
 }
