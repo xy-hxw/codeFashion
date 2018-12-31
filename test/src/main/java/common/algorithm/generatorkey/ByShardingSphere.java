@@ -28,7 +28,7 @@ public class ByShardingSphere {
 
     /**
      * 获取所有网卡的hashcode
-     * @return 返回网卡的hashcode
+     * @return 返回网卡ip和
      */
     private static Long getIPNum() {
         try {
