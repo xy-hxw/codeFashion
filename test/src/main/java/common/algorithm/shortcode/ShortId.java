@@ -21,7 +21,7 @@ public class ShortId {
      * @param num 36进制
      * @return 返回36进制数
      */
-    private static String createId(Long id, Integer num, String code) {
+    public static String createId(Long id, Integer num, String code) {
         if (null == id || id == 0) {
             return "0";
         }
@@ -55,9 +55,9 @@ public class ShortId {
     }
 
     /**
-     * 获取一个4位随机数
+     * 获取一个随机字符串
      */
-    private static String randomNum(Integer num) {
+    public static String randomNum(Integer num) {
         String str = "0123456789abcdefghijklmnopqrstuvwxyz";
         List<String> rlist = new ArrayList<>(Arrays.asList(str.split("")));
         StringBuilder sb = new StringBuilder();

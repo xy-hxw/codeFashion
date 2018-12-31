@@ -113,6 +113,19 @@
         <version>${corenlp.version}</version>
         <classifier>models-chinese</classifier>
     </dependency>
+  	<dependency>
+	  	<groupId>io.shardingsphere</groupId>
+	  	<artifactId>sharding-jdbc</artifactId>
+	  	<version>3.1.0.M1</version>
+	  	<type>pom</type>
+  	</dependency>
+	  <dependency>
+		  <groupId>io.shardingsphere</groupId>
+		  <artifactId>sharding-core</artifactId>
+		  <version>3.1.0.M1</version>
+	  </dependency>
+
+
   </dependencies>
   <build>
     <finalName>test</finalName>
