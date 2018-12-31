@@ -14,7 +14,7 @@ import java.util.Enumeration;
 /**
  * @Author Administrator
  * @Date 2018/12/30 11:56
- * @Description ByShardingSphere
+ * @Description 雪花算法
  */
 public class ByShardingSphere {
 
@@ -27,7 +27,7 @@ public class ByShardingSphere {
     }
 
     /**
-     * 获取所有网卡的hashcode
+     * 获取内网ip和
      * @return 返回网卡ip和
      */
     private static Long getIPNum() {
