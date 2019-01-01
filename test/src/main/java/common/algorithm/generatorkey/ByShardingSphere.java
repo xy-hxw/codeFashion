@@ -4,10 +4,7 @@ import common.algorithm.shortcode.ShortId;
 import io.shardingsphere.core.keygen.DefaultKeyGenerator;
 
 import java.math.BigInteger;
-import java.net.Inet4Address;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
+import java.net.*;
 import java.util.Arrays;
 import java.util.Enumeration;
 
@@ -99,6 +96,13 @@ public class ByShardingSphere {
         for (int i = 0; i < 10; i++) {
             String number = generatorId();
             System.out.println(number);
+        }
+        try {
+            InetAddress localHost = InetAddress.getLocalHost();
+            String hostAddress = localHost.getHostAddress();
+            System.out.println(hostAddress);
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
         }
     }
 }
