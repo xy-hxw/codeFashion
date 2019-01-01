@@ -85,6 +85,7 @@ public class ByShardingSphere {
         if (ipNum == null) {
             return null;
         }
+        DefaultKeyGenerator.setWorkerId(ipNum);
         Number number = defaultKeyGenerator.generateKey();
         System.out.println("生成的id="+number.toString());
 
@@ -93,7 +94,8 @@ public class ByShardingSphere {
         return createId(new BigInteger("18446744073709551616"), num, ShortId.randomNum(num));
     }
     public static void main(String[] args) {
-        for (int i = 0; i < 10; i++) {
+        int num = 3;
+        for (int i = 0; i < num; i++) {
             String number = generatorId();
             System.out.println(number);
         }
