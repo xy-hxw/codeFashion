@@ -8,6 +8,9 @@ import java.util.concurrent.RecursiveTask;
 /**
  * @author huoxianwei
  * @date 2019/1/15 10:19
+ * 实现fork--join两种方式
+ * 1：继承 RecursiveTask   有返回值
+ * 2：继承 RecursiveAction 无返回值
  */
 public class CountTask extends RecursiveTask<Integer> {
 
