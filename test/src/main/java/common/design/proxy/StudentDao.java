@@ -1,7 +1,10 @@
 package common.design.proxy;
 
-public class StudentDao {
-	public void save() {
+/**
+ * @author huoxianwei
+ */
+class StudentDao {
+	void save() {
 		System.out.println(" save student");
 	}
 }

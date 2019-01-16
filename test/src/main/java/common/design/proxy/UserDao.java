@@ -1,5 +1,8 @@
 package common.design.proxy;
 
+/**
+ * @author huoxianwei
+ */
 public class UserDao implements IUserDao {
 
 	@Override
