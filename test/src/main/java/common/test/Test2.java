@@ -1,6 +1,7 @@
 package common.test;
 
 import java.util.Arrays;
+import java.util.concurrent.Semaphore;
 
 /**
  * @author huoxianwei
@@ -13,8 +14,24 @@ public class Test2 {
         Arrays.stream(arrays).forEach(System.out::println);
     }
 
+    /**
+     * 队列同步器 AQS
+     * 信号凭证
+     */
+    private static void semaphoreTest() {
+        Semaphore semaphore = new Semaphore(0);
+        boolean b = semaphore.tryAcquire();
+        System.out.println(b);
+        // 增加一个凭证
+        semaphore.release();
+        // 使用一个凭证（AQS）
+        b = semaphore.tryAcquire();
+        System.out.println(b);
+    }
+
     public static void main(String[] args) {
         sortTest();
+        semaphoreTest();
     }
 
     /**
