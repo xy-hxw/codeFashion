@@ -1,6 +1,7 @@
 package common.test;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.concurrent.Semaphore;
 
 /**
@@ -30,8 +31,11 @@ public class Test2 {
     }
 
     public static void main(String[] args) {
-        sortTest();
-        semaphoreTest();
+//        sortTest();
+//        semaphoreTest();
+        HashMap<String, String> map = new HashMap<>();
+        map.put("abc", "abc");
+        System.out.println(map.size());
     }
 
     /**
