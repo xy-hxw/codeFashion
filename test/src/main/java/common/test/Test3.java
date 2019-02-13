@@ -1,5 +1,6 @@
 package common.test;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.TemporalAdjusters;
@@ -34,7 +35,15 @@ public class Test3 {
         System.out.println(str1);
     }
 
+    private static void testBigDecimal () {
+        BigDecimal bigDecimal = new BigDecimal("1.256");
+        boolean b = bigDecimal.compareTo(BigDecimal.ZERO) == 0;
+        System.out.println(b);
+        System.out.println(bigDecimal.divide(new BigDecimal("-1")));
+    }
+
     public static void main(String[] args) {
-        testDate();
+//        testDate();
+        testBigDecimal();
     }
 }

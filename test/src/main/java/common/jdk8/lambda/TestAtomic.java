@@ -1,4 +1,4 @@
-package common.lambda;
+package common.jdk8.lambda;
 
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.LongAdder;

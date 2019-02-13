@@ -1,4 +1,4 @@
-package common.lambda.function;
+package common.jdk8.lambda.function;
 
 import com.alibaba.fastjson.JSON;
 
@@ -29,7 +29,7 @@ public class FunctionTest {
      * @param consumer 函数
      */
     private static void test2(List<String> list, Consumer<String> consumer) {
-        list.forEach(consumer::accept);
+        list.forEach(consumer);
         consumer.accept(JSON.toJSONString(list));
     }
 

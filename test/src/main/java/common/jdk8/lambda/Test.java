@@ -1,8 +1,8 @@
-package common.lambda;
-
-import java.util.*;
+package common.jdk8.lambda;
 
 import com.alibaba.fastjson.JSON;
+
+import java.util.*;
 
 public class Test {
 	/**
