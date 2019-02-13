@@ -4,13 +4,19 @@ import com.alibaba.fastjson.JSON;
 
 import java.util.*;
 
-public class Test {
+/**
+ * @author huoxianwei
+ */
+public class TestCompare {
+
+	private static final int NUM = 5;
+
 	/**
 	 * 按map中的key或value排序
 	 */
 	private static void compareMap() {
-		Map<Integer, Integer> map = new HashMap<>();
-		for (int i = 0; i < 5; i++) {
+		Map<Integer, Integer> map = new HashMap<>(10);
+		for (int i = 0; i < NUM; i++) {
 			map.put(i, new Random().nextInt(10));
 		}
 		System.out.println(JSON.toJSONString(map));
