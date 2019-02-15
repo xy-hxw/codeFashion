@@ -1,4 +1,4 @@
-package common.threa.forkjoin;
+package common.thread.forkjoin;
 
 import java.util.concurrent.*;
 

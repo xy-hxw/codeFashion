@@ -1,14 +1,24 @@
-package common.threa;
+package common.thread;
 
 import java.util.concurrent.TimeUnit;
 
 /**
  * @Author huoxianwei
  * @Date 2018/12/17 13:59
- * @Description Test1
+ * @Description Thread
  */
 public class TestThread {
-    // start方法，线程被放入等待队列，等待CPU调度，并不一定马上执行
+
+    static class MyThread extends Thread {
+        @Override
+        public void run() {
+            System.out.println("thread run method ...");
+        }
+    }
+
+    /**
+     * start方法，线程被放入等待队列，等待CPU调度，并不一定马上执行
+     */
     public static void test() {
         System.out.println("线程启动前");
         Thread thread = new Thread(() -> {
@@ -19,12 +29,14 @@ public class TestThread {
                 e.printStackTrace();
             }
         });
-        System.out.println("线程启动中");
+        System.out.println("test线程启动中");
         thread.start();
-        System.out.println("线程启动后");
+        System.out.println("test线程启动后");
     }
 
-    // run方法当做普通方法的调用方式，方法顺序执行
+    /**
+     * run方法当做普通方法的调用方式，方法顺序执行
+     */
     public static void test1() {
         System.out.println("线程启动前1");
         Thread thread = new Thread(() -> {
@@ -35,12 +47,15 @@ public class TestThread {
                 e.printStackTrace();
             }
         });
-        System.out.println("线程启动中1");
+        System.out.println("test1线程启动中1");
         thread.run();
-        System.out.println("线程启动后1");
+        System.out.println("test1线程启动后1");
     }
 
     public static void main(String[] args) {
+        MyThread myThread = new MyThread();
+        myThread.start();
+        System.out.println("--------------");
         test();
         System.out.println("--------------");
         test1();
