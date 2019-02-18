@@ -60,11 +60,11 @@ public class Test {
 		String.format("%s, appid(%d), tikcet(%s)", "abc".toString(), 0, "AAFcLGoDADAoAnuonKSFn5aBa1cIG_AIw9hd1_7Uf7SHLCVho-gyCWCcJD7U3u2q-dFa3uNFU9c");
 	}
 	public static void main(String[] args) {
-//		testList();
+		testList();
 //		String property = System.getProperty("user.dir");
 //		System.out.println(property);
 //		testSplit();
 //		test2();
-		test3();
+//		test3();
 	}
 }

@@ -1,12 +1,4 @@
-package common;
-
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+package common.fenci;
 
 import com.kennycason.kumo.CollisionMode;
 import com.kennycason.kumo.WordCloud;
@@ -17,6 +9,12 @@ import com.kennycason.kumo.font.scale.SqrtFontScalar;
 import com.kennycason.kumo.nlp.FrequencyAnalyzer;
 import com.kennycason.kumo.nlp.tokenizers.ChineseWordTokenizer;
 import com.kennycason.kumo.palette.LinearGradientColorPalette;
+
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WordCloudUtil {
 	public static void createWord(List<WordFrequency> wordFrequencyList, String path) throws IOException {

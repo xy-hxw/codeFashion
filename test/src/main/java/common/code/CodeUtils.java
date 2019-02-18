@@ -1,45 +1,29 @@
-package common;
+package common.code;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.Map;
-
-import javax.imageio.ImageIO;
-
-import org.apache.log4j.Logger;
-
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.Binarizer;
-import com.google.zxing.BinaryBitmap;
-import com.google.zxing.DecodeHintType;
-import com.google.zxing.EncodeHintType;
-import com.google.zxing.LuminanceSource;
-import com.google.zxing.MultiFormatReader;
-import com.google.zxing.MultiFormatWriter;
-import com.google.zxing.NotFoundException;
-import com.google.zxing.Result;
+import com.google.zxing.*;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.swetake.util.Qrcode;
-
 import jp.sourceforge.qrcode.QRCodeDecoder;
 import jp.sourceforge.qrcode.data.QRCodeImage;
+import org.apache.log4j.Logger;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Map;
 
 /**
  * 二维码工具类
  * @author hxw
- *
  */
 public class CodeUtils {
 	private final static Logger log = Logger.getLogger(CodeUtils.class);
@@ -49,7 +33,7 @@ public class CodeUtils {
 	 * @param version   版本(7)
 	 * @param imageUrl  生成二维码路径
 	 */
-	public static void createQRcode(String codeUrl, int version, String imageUrl){
+	private static void createQRcode(String codeUrl, int version, String imageUrl){
 		try {
 			Qrcode code = new Qrcode();
 			// 设置二维码的容错能力等级
@@ -72,8 +56,9 @@ public class CodeUtils {
 			gs.clearRect(0, 0, width, height);
 			//定义偏移量
 			int pixoff = 2;
-			byte[] bytes = codeUrl.getBytes("utf-8");
-			if(null!=bytes && bytes.length<120){
+			byte[] bytes = codeUrl.getBytes(StandardCharsets.UTF_8);
+			int length = 120;
+			if(bytes.length < length){
 				boolean[][] calQrcode = code.calQrcode(bytes);
 				for (int i = 0; i < calQrcode.length; i++) {
 					for (int j = 0; j < calQrcode.length; j++) {
@@ -94,9 +79,9 @@ public class CodeUtils {
 	/**
 	 * 解析QRcode二维码
 	 * @param imageUrl 二维码路径
-	 * @return
+	 * @return 解析后信息
 	 */
-	public static String analysisQRCode(String imageUrl) {
+	private static String analysisQRCode(String imageUrl) {
 		String result = "";
 		try {
 			//图片路径
@@ -124,7 +109,7 @@ public class CodeUtils {
 
 			});
 			//通过解析二维码获得信息
-			result = new String(decode, "utf-8");
+			result = new String(decode, StandardCharsets.UTF_8);
 		} catch (IOException e) {
 			log.error("解析二维码出错");
 			e.printStackTrace();
@@ -137,11 +122,11 @@ public class CodeUtils {
 	 * @param imageUrl  生成的二维码路径
 	 * @param type  图片类型
 	 */
-	public static void createZXing(String codeUrl, String imageUrl, String type){
+	private static void createZXing(String codeUrl, String imageUrl, String type){
 		try {
 			QRCodeWriter qrCodeWriter = new QRCodeWriter();
 			//设置二维码容错级别
-			Hashtable<EncodeHintType, Object> hintMap = new Hashtable<EncodeHintType, Object>();
+			Hashtable<EncodeHintType, Object> hintMap = new Hashtable<>();
 			// 矫错级别
 			hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
 			hintMap.put(EncodeHintType.CHARACTER_SET, "UTF-8");
@@ -151,11 +136,12 @@ public class CodeUtils {
 			//创建比特矩阵(位矩阵)的QR码编码的字符串
 			BitMatrix byteMatrix = qrCodeWriter.encode(codeUrl, BarcodeFormat.QR_CODE, width, height, hintMap);
 			int matrixWidth = byteMatrix.getWidth();
-			BufferedImage image = new BufferedImage(matrixWidth, matrixWidth, BufferedImage.TYPE_INT_RGB);
+			int matrixHeight = byteMatrix.getWidth();
+			BufferedImage image = new BufferedImage(matrixWidth, matrixHeight, BufferedImage.TYPE_INT_RGB);
 			image.createGraphics();
 			Graphics2D graphics = (Graphics2D) image.getGraphics();
 			graphics.setColor(Color.WHITE);
-			graphics.fillRect(0, 0, matrixWidth, matrixWidth);
+			graphics.fillRect(0, 0, matrixWidth, matrixHeight);
 			//使用比特矩阵画并保存图像
 			graphics.setColor(Color.BLACK);
 			for (int i = 0; i < matrixWidth; i++){
@@ -165,12 +151,7 @@ public class CodeUtils {
 					}
 				}
 			}
-			graphics.dispose();
-			image.flush();
-			File file = new File(imageUrl);
-			OutputStream outputStream = new FileOutputStream(file);
-			boolean write = ImageIO.write(image, type, outputStream);
-			System.out.println(write);
+			closeStream(graphics, image, imageUrl, image, type);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -178,7 +159,7 @@ public class CodeUtils {
 	/**
 	 * 解析ZXing二维码图片
 	 * @param imageUrl ZXing二维码路径
-	 * @return
+	 * @return 路径
 	 */
 	public static String analysisZXing(String imageUrl) {
         BufferedImage image;
@@ -187,36 +168,35 @@ public class CodeUtils {
             LuminanceSource source = new BufferedImageLuminanceSource(image);
             Binarizer binarizer = new HybridBinarizer(source);
             BinaryBitmap binaryBitmap = new BinaryBitmap(binarizer);
-            Map<DecodeHintType, Object> hints = new HashMap<DecodeHintType, Object>();
+            Map<DecodeHintType, Object> hints = new HashMap<>(16);
             hints.put(DecodeHintType.CHARACTER_SET, "UTF-8");
             // 对图像进行解码
             Result result = new MultiFormatReader().decode(binaryBitmap, hints);
             return result.getText();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (NotFoundException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 	/**
 	 * 
-	 * @param imageUrl
-	 * @param logoPath
-	 * @param type
+	 * @param imageUrl 二维码路径
+	 * @param logoPath logo路径
+	 * @param type 图片类型
 	 */
-	public static void createZXingWithLogo(String codeUrl, String imageUrl, String logoPath, String type){
+	private static void createZXingWithLogo(String codeUrl, String imageUrl, String logoPath, String type){
 		try {
 			//设置二维码容错级别
-			Hashtable<EncodeHintType, Object> hintMap = new Hashtable<EncodeHintType, Object>();
+			Hashtable<EncodeHintType, Object> hintMap = new Hashtable<>();
 			hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
 			hintMap.put(EncodeHintType.CHARACTER_SET, "UTF-8");
 			hintMap.put(EncodeHintType.MARGIN, "1");
 			//创建比特矩阵(位矩阵)的QR码编码的字符串
 			int width = 200;
-			BitMatrix bitMatrix = new MultiFormatWriter().encode(codeUrl, BarcodeFormat.QR_CODE, width, width, hintMap);
+			BitMatrix bitMatrix = new MultiFormatWriter().encode(codeUrl, BarcodeFormat.QR_CODE, width, 200, hintMap);
 			int imageWidth = bitMatrix.getWidth();
-			BufferedImage image = new BufferedImage(imageWidth, imageWidth, BufferedImage.TYPE_INT_RGB);
+			int imageHeight = bitMatrix.getWidth();
+			BufferedImage image = new BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_INT_RGB);
 			int black = 0xFF000000;
 			int white = 0xFFFFFFFF;
 			for(int x=0;x<width;x++){
@@ -228,28 +208,41 @@ public class CodeUtils {
 			//载入logo  
 	        Image img = ImageIO.read(new File(logoPath));
 	        gs.drawImage(img, 75, 75, null);
-	        gs.dispose();
-	        img.flush();
-	        File file = new File(imageUrl);
-	        boolean write = ImageIO.write(image, type, file);
-	        System.out.println(write);
+			closeStream(gs, img, imageUrl, image, type);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
+	private static void closeStream (Graphics2D gs, Image img, String imageUrl, BufferedImage image, String type) throws IOException {
+		gs.dispose();
+		img.flush();
+		File file = new File(imageUrl);
+		boolean write = ImageIO.write(image, type, file);
+		System.out.println(write);
+	}
+
 	public static void main(String[] args) {
-		for (int i = 0; i < 10000; i++) {
-			
-			String imageUrl = "D:/code/codeZxing"+i+".jpg";
-			String codeUrl = "https://zli.jd.com/index-m.html?activityId=9E859E75E";
-//			String logoPath = "D:/image001.jpg";
-//		createQRcode(codeUrl, 7, imageUrl);
-//		String str = analysisQRCode(imageUrl)
-			createZXing(codeUrl, imageUrl, "jpg");
-//		String str = analysisZXing(imageUrl);
-//		createZXingWithLogo(codeUrl, imageUrl, logoPath, "JPEG");
-			String str = analysisZXing(imageUrl);
-		}
+		int version = 7;
+		String jpg = "jpg";
+		String jpeg = "JPEG";
+		String imageUrl = "D:/codeZxing.jpg";
+		String codeUrl = "https://www.baidu.com/index.html?activityId=9E859E75E";
+		String logoPath = "D:/image001.jpg";
+		// 日本的二维码生成
+		createQRcode(codeUrl, version, imageUrl);
+		// 日本的二维码解析
+		String str = analysisQRCode(imageUrl);
+		System.out.println("日本="+str);
+		// google zxing 二维码生成
+		createZXing(codeUrl, imageUrl, jpg);
+		// google zxing 二维码解析
+		String str1 = analysisZXing(imageUrl);
+		System.out.println("google="+str1);
+		// google zxing 有logo的二维码生成
+		createZXingWithLogo(codeUrl, imageUrl, logoPath, jpeg);
+		String strByLogo = analysisZXing(imageUrl);
+		System.out.println("google logo="+strByLogo);
 	}
 }
 
