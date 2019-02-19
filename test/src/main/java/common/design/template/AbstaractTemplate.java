@@ -34,15 +34,14 @@ public abstract class AbstaractTemplate {
      *
      */
     protected boolean isDeal() {
-        System.out.println(" 吃默认订餐");
         return true;
     }
     // 业务处理
     protected void doEat() {
-        System.out.println(" 默认吃套餐......");
+        System.out.println(" 新订套餐......");
     }
     // 业务处理
     private void defaultEat() {
-        System.out.println(" 默认吃套餐......");
+        System.out.println(" 默认的套餐......");
     }
 }

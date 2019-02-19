@@ -30,7 +30,7 @@ public class TestThreadFactory {
         // 线程优先级  1-10
         threadFactoryBuilder.setPriority(1);
         ThreadFactory build = threadFactoryBuilder.build();
-        return new ScheduledThreadPoolExecutor(1, build);
+        return new ScheduledThreadPoolExecutor(100, build);
     }
 
     private static void test () {

@@ -93,7 +93,6 @@ public class TestHashMap {
         map.forEach((key, value) -> System.out.println(key + "--" + value));
     }
 
-
     public static void main(String[] args) {
         test1();
         test2();
