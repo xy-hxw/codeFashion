@@ -11,6 +11,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 /**
  * @author huoxianwei
  * @date 2019/2/19 18:01
+ * ReentrantReadWriteLock 读锁和写锁分离
  */
 public class TestReentrantReadWriteLock<T> {
 
@@ -20,6 +21,7 @@ public class TestReentrantReadWriteLock<T> {
     private void write (Object t) {
         try {
             lock.writeLock().lock();
+            sleep(2);
             System.out.println("write "+ t);
             this.obj = t;
         } catch (Exception e) {
@@ -32,7 +34,8 @@ public class TestReentrantReadWriteLock<T> {
     private void read () {
         try {
             lock.readLock().lock();
-            System.out.println("read" + obj);
+            sleep(1);
+            System.out.println("read " + obj);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -43,18 +46,27 @@ public class TestReentrantReadWriteLock<T> {
     private static void test () {
         TestReentrantReadWriteLock readWriteLock = new TestReentrantReadWriteLock();
         ScheduledThreadPoolExecutor threadPoolExecutor = TestThreadFactory.testThreadFactoryBuilder();
-        int num = 10;
+        int num = 5;
         for (int i = 0; i < num; i++) {
-            threadPoolExecutor.submit(()-> readWriteLock.write(ThreadLocalRandom.current().nextInt(10000)));
-        }
-        for (int i = 0; i < num; i++) {
-            threadPoolExecutor.submit(readWriteLock::read);
+            if (ThreadLocalRandom.current().nextBoolean()) {
+                threadPoolExecutor.submit(()-> {
+                    for (int j = 0; j < num; j++) {
+                        readWriteLock.write(ThreadLocalRandom.current().nextInt(10000));
+                    }
+                });
+            } else {
+                threadPoolExecutor.submit(()-> {
+                    for (int j = 0; j < num; j++) {
+                        readWriteLock.read();
+                    }
+                });
+            }
         }
     }
 
-    private static void sleep () {
+    private static void sleep (int second) {
         try {
-            TimeUnit.SECONDS.sleep(10);
+            TimeUnit.SECONDS.sleep(second);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -62,6 +74,6 @@ public class TestReentrantReadWriteLock<T> {
 
     public static void main(String[] args) {
         test();
-        sleep();
+        sleep(10);
     }
 }
