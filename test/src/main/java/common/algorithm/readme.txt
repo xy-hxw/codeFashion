@@ -2,6 +2,8 @@
 
     1：排序算法-sorting
         冒泡排序-Bubble.java
+        快速排序-QuickSort.java
+
         计数排序-AlgorithmUtil.java
         选择排序-Selection.java
 
