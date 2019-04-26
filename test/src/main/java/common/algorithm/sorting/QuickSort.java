@@ -27,11 +27,11 @@ public class QuickSort {
         int max = end;
         int first = array[min];
         while (min < max) {
-            // 从右边找到小于基准数的第一个数
+            // 从右边找到小于等于基准数的第一个数
             while (min < max && array[max] > first) {
                 max--;
             }
-            // 从左边找到大于等于基准数的第一个数
+            // 从左边找到大于基准数的第一个数
             while (min < max && array[min] <= first) {
                 min++;
             }
@@ -42,12 +42,15 @@ public class QuickSort {
                 array[max] = temp;
             }
         }
-
+        // 基准数和最小位置处值交换
+        // 此时的min和max相同
         first = array[min];
         array[min] = array[start];
         array[start] = first;
         System.out.println("排序后="+start+" "+" "+end + " "+ min+"  "+max+"  "+ JSON.toJSONString(array));
+        // 开始位置- 最小位置减一
         order(start, min - 1, array);
+        // 最大位置减一   结束
         order(max + 1, end, array);
     }
 

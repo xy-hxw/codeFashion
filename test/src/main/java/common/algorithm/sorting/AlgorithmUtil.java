@@ -3,6 +3,7 @@ package common.algorithm.sorting;
 import java.util.Arrays;
 
 /**
+ * 计数排序
  * @author huoxianwei
  * @date 2019/2/15 17:04
  * 适用于一组数 最大数和最小数差不大的数组排序

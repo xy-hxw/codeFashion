@@ -15,6 +15,9 @@ import java.util.Enumeration;
  */
 public class ByShardingSphere {
 
+    /**
+     * 雪花算法
+     */
     private static DefaultKeyGenerator defaultKeyGenerator;
     private static Long ipNum;
 
@@ -40,7 +43,6 @@ public class ByShardingSphere {
                     InetAddress inetAddress = inetAddresses.nextElement();
                     if ((inetAddress instanceof Inet4Address) && !inetAddress.isLoopbackAddress()) {
                         String hostAddress = inetAddress.getHostAddress();
-                        System.out.println(hostAddress);
                         return Arrays.stream(hostAddress.split("\\.")).mapToLong(Long::valueOf).sum();
                     }
                 }
@@ -87,18 +89,13 @@ public class ByShardingSphere {
         }
         DefaultKeyGenerator.setWorkerId(ipNum);
         Number number = defaultKeyGenerator.generateKey();
-        System.out.println("生成的id="+number.toString());
-
         // 将id转换为36进制字符串
         int num = 36;
-        return createId(new BigInteger("18446744073709551616"), num, ShortId.randomNum(num));
+        return createId(new BigInteger(""+number), num, ShortId.randomNum(num));
     }
     public static void main(String[] args) {
-        int num = 3;
-        for (int i = 0; i < num; i++) {
-            String number = generatorId();
-            System.out.println(number);
-        }
+        String number = generatorId();
+        System.out.println(number);
         try {
             InetAddress localHost = InetAddress.getLocalHost();
             String hostAddress = localHost.getHostAddress();
