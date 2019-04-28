@@ -7,7 +7,10 @@
         计数排序-AlgorithmUtil.java
         选择排序-Selection.java
 
+        插入排序-Insertion.java
         希尔排序-Shell.java
+
+        归并排序-Merge.java
 
     2：短位码-shortcode
         随机生成-ShortId.java
