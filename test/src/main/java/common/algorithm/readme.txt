@@ -13,6 +13,8 @@
         归并排序-Merge.java
         堆排序-HeapSort.java
 
+        桶排序-BucketSort.java
+
 
     2：短位码-shortcode
         随机生成-ShortId.java
