@@ -4,6 +4,9 @@ import org.apache.commons.lang3.time.DateUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 /**
@@ -33,8 +36,17 @@ public class Test {
         }
     }
 
+    public static void test3 () {
+        LocalDateTime with = LocalDateTime.now().with(LocalTime.MAX);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String format = formatter.format(with);
+        System.out.println(format);
+    }
+
+
     public static void main(String[] args) {
 //        test1();
-        test2();
+//        test2();
+        test3();
     }
 }

@@ -12,8 +12,9 @@
 
         归并排序-Merge.java
 
+
     2：短位码-shortcode
         随机生成-ShortId.java
 
     3：分布式id
-        雪花算法-ByShardingSphere
+        雪花算法-ByShardingSphere.java
