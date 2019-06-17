@@ -48,13 +48,14 @@ public class FunctionTest {
         }
         return rlist;
     }
+
     public static void main(String[] args) {
         String str = "abc";
         List<String> list = new ArrayList<>();
         list.add("key");
         list.add("value");
         // predicate
-        boolean b = test1("abc"::equals);
+        boolean b = test1(str::equals);
         System.out.println(b);
         // consumser
         test2(list, key->System.out.println(key));
