@@ -50,8 +50,9 @@ public class Test4 {
                 } else if (j==n) {
                     minRight = a[i];
                 } else {
-                    minRight = Math.max(a[i], b[j]);
+                    minRight = Math.min(a[i], b[j]);
                 }
+                System.out.println(maxLeft+"   "+minRight);
                 return (maxLeft + minRight)/2.0;
             }
         }
@@ -60,7 +61,7 @@ public class Test4 {
 
     public static void main(String[] args) {
         int[] nums1 = {1, 2};
-        int[] nums2 = {3, 4};
+        int[] nums2 = {-1, 3};
         double test = test(nums1, nums2);
         System.out.println(test);
     }
