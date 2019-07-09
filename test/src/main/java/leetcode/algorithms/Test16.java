@@ -15,9 +15,10 @@ public class Test16 {
      * @return 结果
      */
     public static int test (int[] array, int target) {
+        int temp = 2;
         int min = Math.abs(array[0] + array[1] + array[2] - target);
         int total = array[0] + array[1] + array[2];
-        for (int i = 0; i < array.length-2; i++) {
+        for (int i = 0; i < array.length-temp; i++) {
             for (int j = i+1; j < array.length-1; j++) {
                 for (int k = j+1; k < array.length; k++) {
                     int sum = array[i] + array[j] + array[k];
