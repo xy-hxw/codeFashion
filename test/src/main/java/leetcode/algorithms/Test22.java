@@ -14,7 +14,7 @@ import java.util.List;
 public class Test22 {
 
     public static List<String> test1 (int n) {
-        List<String> ans = new ArrayList();
+        List<String> ans = new ArrayList<>(2*n);
         merge(ans, "", 0, 0, n);
         return ans;
     }
@@ -50,6 +50,10 @@ public class Test22 {
             }
         }
         return list;
+    }
+
+    public static void test3 (int n) {
+        ArrayList<String> l = new ArrayList<>();
     }
 
     public static void main(String[] args) {
