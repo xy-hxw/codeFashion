@@ -114,23 +114,11 @@ public class Test24 {
     }
 
     public static void main(String[] args) {
-        ListNode n1 = new ListNode(1);
-        ListNode n2 = new ListNode(2);
-        ListNode n4 = new ListNode(4);
-        ListNode n3 = new ListNode(3);
-        n1.next = n2;
-        n2.next = n3;
-        n3.next = n4;
-        ListNode test = test3(n1);
+        ListNode node = ListNode.node();
+        ListNode test = test3(node);
         while (null != test) {
             System.out.println(test.val);
             test = test.next;
         }
-    }
-
-    public static class ListNode {
-        int val;
-        ListNode next;
-        ListNode(int x) { val = x; }
     }
 }
