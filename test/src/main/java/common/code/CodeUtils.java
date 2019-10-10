@@ -226,23 +226,36 @@ public class CodeUtils {
 		int version = 7;
 		String jpg = "jpg";
 		String jpeg = "JPEG";
-		String imageUrl = "D:/codeZxing.jpg";
+		String imageUrl = "D:/12313.jpg";
 		String codeUrl = "https://www.baidu.com/index.html?activityId=9E859E75E";
 		String logoPath = "D:/image001.jpg";
-		// 日本的二维码生成
-		createQRcode(codeUrl, version, imageUrl);
-		// 日本的二维码解析
-		String str = analysisQRCode(imageUrl);
-		System.out.println("日本="+str);
+//		// 日本的二维码生成
+//		createQRcode(codeUrl, version, imageUrl);
+//		// 日本的二维码解析
+//		String str = analysisQRCode(imageUrl);
+//		System.out.println("日本="+str);
 		// google zxing 二维码生成
+
+		StringBuilder sb = new StringBuilder();
+		sb.append("BEGIN:VCARD").append("\n");
+		sb.append("VERSION:3.0").append("\n");
+		sb.append("FN:马强").append("\n");
+		sb.append("TITLE:产品").append("\n");
+		sb.append("TEL;CELL:18211021902").append("\n");
+		sb.append("EMAIL;TYPE=PREF,INTERNET:maqiang11@jd.com").append("\n");
+		sb.append("ORG:京东数字科技").append("\n");
+		sb.append("URL:https://www.baidu.com/").append("\n");
+		sb.append("END:VCARD");
+		codeUrl = sb.toString();
+//
 		createZXing(codeUrl, imageUrl, jpg);
 		// google zxing 二维码解析
 		String str1 = analysisZXing(imageUrl);
 		System.out.println("google="+str1);
-		// google zxing 有logo的二维码生成
-		createZXingWithLogo(codeUrl, imageUrl, logoPath, jpeg);
-		String strByLogo = analysisZXing(imageUrl);
-		System.out.println("google logo="+strByLogo);
+//		// google zxing 有logo的二维码生成
+//		createZXingWithLogo(codeUrl, imageUrl, logoPath, jpeg);
+//		String strByLogo = analysisZXing(imageUrl);
+//		System.out.println("google logo="+strByLogo);
 	}
 }
 

@@ -1,7 +1,9 @@
 package common.date;
 
 import com.alibaba.fastjson.JSON;
+import com.google.common.collect.Lists;
 import common.pojo.Product;
+import common.pojo.ProductDetail;
 import org.apache.commons.lang3.time.DateUtils;
 
 import java.time.LocalDate;
@@ -67,7 +69,20 @@ public class TestDateUtils {
     }
 
     public static void main(String[] args) {
-        test1();
+//        test1();
 //        test2();
+        List<ProductDetail> list = Lists.newArrayList();
+        for (int i = 0; i < 5; i++) {
+            ProductDetail product = new ProductDetail();
+            product.setPrice(i);
+            product.setName("name-"+i);
+            product.setDate(DateUtils.addDays(new Date(), -i));
+            list.add(product);
+        }
+        System.out.println(JSON.toJSONString(list));
+        Optional<ProductDetail> max = list.stream().filter(product -> product.getPrice() > 2).max(Comparator.comparing(ProductDetail::getDate));
+        if (max.isPresent()) {
+            System.out.println(max.get());
+        }
     }
 }
