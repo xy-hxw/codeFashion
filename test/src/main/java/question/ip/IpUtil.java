@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author huoxianwei
  * @date 2019/10/23 17:25
  */
-public class Test2 {
+public class IpUtil {
     private static final String COMMA = ",";
     private static final String UNKNOWN = "unknown";
 

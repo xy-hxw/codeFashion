@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.LongAdder;
 /**
  * @Author huoxianwei
  * @Date 2018/12/21 16:35
- * @Description Test1
+ * @Description CAS
  */
 public class TestAtomic {
     public static void test1() {

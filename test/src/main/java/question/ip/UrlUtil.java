@@ -14,7 +14,7 @@ import java.nio.charset.StandardCharsets;
  * @author huoxianwei
  * @date 2019/7/3 19:52
  */
-public class Test1 {
+public class UrlUtil {
     private static String getAddressByIP (String strIP) {
         try {
             URL url = new URL("http://ip.taobao.com/service/getIpInfo.php?ip=" + strIP);
