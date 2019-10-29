@@ -1,7 +1,5 @@
 package question.ip;
 
-import lombok.extern.slf4j.Slf4j;
-
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
@@ -9,7 +7,6 @@ import java.net.UnknownHostException;
  * @author huoxianwei
  * @date 2019/10/25 18:25
  */
-@Slf4j
 public class WebUtil {
     public static void main(String[] args) {
         String url = "www.baidu.com";

@@ -1,5 +1,7 @@
 package leetcode.algorithms;
 
+import java.util.Stack;
+
 /**
  * @author huoxianwei
  * @date 2019/10/15 11:45
@@ -8,38 +10,27 @@ package leetcode.algorithms;
  */
 public class Test32 {
 
-    public static int longestValidParentheses(String s) {
-        int left = 0, right = 0, maxlength = 0;
+    private static int longestValidParentheses(String s) {
+        int maxans = 0;
+        Stack<Integer> stack = new Stack<>();
+        stack.push(-1);
         for (int i = 0; i < s.length(); i++) {
             if (s.charAt(i) == '(') {
-                left++;
+                stack.push(i);
             } else {
-                right++;
-            }
-            if (left == right) {
-                maxlength = Math.max(maxlength, 2 * right);
-            } else if (right >= left) {
-                left = right = 0;
+                stack.pop();
+                if (stack.empty()) {
+                    stack.push(i);
+                } else {
+                    maxans = Math.max(maxans, i - stack.peek());
+                }
             }
         }
-        left = right = 0;
-        for (int i = s.length() - 1; i >= 0; i--) {
-            if (s.charAt(i) == '(') {
-                left++;
-            } else {
-                right++;
-            }
-            if (left == right) {
-                maxlength = Math.max(maxlength, 2 * left);
-            } else if (left >= right) {
-                left = right = 0;
-            }
-        }
-        return maxlength;
+        return maxans;
     }
 
     public static void main(String[] args) {
-        String str = "(()";
+        String str = ")(()))";
         int i = longestValidParentheses(str);
         System.out.println(i);
     }
