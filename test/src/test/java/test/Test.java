@@ -1,14 +1,14 @@
 package test;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.google.gson.Gson;
-
 public class Test {
-	public static void jsonTest() {
+	private static void jsonTest() {
 		Map<String, Object> extension_map = new HashMap<>();
 		extension_map.put("master", "邀请人");
 		extension_map.put("open_id", "用户公众号标识");
