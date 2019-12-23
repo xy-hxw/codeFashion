@@ -24,9 +24,25 @@ public class Test45 {
         return steps;
     }
 
+    private static int jump1 (int[] nums) {
+        int temp = nums.length-1;
+        int steps = 0;
+        while (temp > 0) {
+            int position = 0;
+            for (int i = temp-1; i >=0; i--) {
+                if (i+nums[i] >= temp) {
+                    position = i;
+                }
+            }
+            temp = position;
+            steps++;
+        }
+        return steps;
+    }
+
     public static void main(String[] args) {
-        int[] nums = {5,5,6,3,1};
-        int jump = jump(nums);
+        int[] nums = {1,1,1,1};
+        int jump = jump1(nums);
         System.out.println(jump);
     }
 }
