@@ -19,4 +19,11 @@ public class ListNode {
         }
         return first;
     }
+
+    public static void out (ListNode node) {
+        while (null != node) {
+            System.out.println(node.val);
+            node = node.next;
+        }
+    }
 }
