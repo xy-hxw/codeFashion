@@ -1,9 +1,7 @@
 package common.date;
 
 import com.alibaba.fastjson.JSON;
-import com.google.common.collect.Lists;
 import common.pojo.Product;
-import common.pojo.ProductDetail;
 import org.apache.commons.lang3.time.DateUtils;
 
 import java.time.LocalDate;
@@ -71,18 +69,25 @@ public class TestDateUtils {
     public static void main(String[] args) {
 //        test1();
 //        test2();
-        List<ProductDetail> list = Lists.newArrayList();
-        for (int i = 0; i < 5; i++) {
-            ProductDetail product = new ProductDetail();
-            product.setPrice(i);
-            product.setName("name-"+i);
-            product.setDate(DateUtils.addDays(new Date(), -i));
-            list.add(product);
-        }
-        System.out.println(JSON.toJSONString(list));
-        Optional<ProductDetail> max = list.stream().filter(product -> product.getPrice() > 2).max(Comparator.comparing(ProductDetail::getDate));
-        if (max.isPresent()) {
-            System.out.println(max.get());
-        }
+//        List<ProductDetail> list = Lists.newArrayList();
+//        for (int i = 0; i < 5; i++) {
+//            ProductDetail product = new ProductDetail();
+//            product.setPrice(i);
+//            product.setName("name-"+i);
+//            product.setDate(DateUtils.addDays(new Date(), -i));
+//            list.add(product);
+//        }
+//        System.out.println(JSON.toJSONString(list));
+//        Optional<ProductDetail> max = list.stream().filter(product -> product.getPrice() > 2).max(Comparator.comparing(ProductDetail::getDate));
+//        if (max.isPresent()) {
+//            System.out.println(max.get());
+//        }
+        Calendar calendar2 = Calendar.getInstance();
+        calendar2.setTime(new Date());
+        calendar2.set(Calendar.HOUR_OF_DAY, 0);
+        calendar2.set(Calendar.MINUTE, 0);
+        calendar2.set(Calendar.SECOND, 0);
+        calendar2.add(Calendar.DAY_OF_MONTH,1);
+        System.out.println(calendar2.getTime());
     }
 }

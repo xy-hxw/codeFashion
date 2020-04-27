@@ -161,6 +161,18 @@
 			<artifactId>dnsjava</artifactId>
 			<version>2.1.9</version>
 		</dependency>
+		<!--netty start-->
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-all</artifactId>
+			<version>4.1.46.Final</version>
+		</dependency>
+		<!--netty end-->
+		<dependency>
+			<groupId>com.googlecode.juniversalchardet</groupId>
+			<artifactId>juniversalchardet</artifactId>
+			<version>1.0.3</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>test</finalName>
