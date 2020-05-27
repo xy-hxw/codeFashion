@@ -1,5 +1,6 @@
 package common.jdk8.date;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
@@ -18,7 +19,7 @@ public class DateUtil {
      * @param date date
      * @return localDateTime
      */
-    public static LocalDateTime ldtByDate(Date date) {
+    private static LocalDateTime ldtByDate(Date date) {
         if (Objects.isNull(date)) {
             date = new Date();
         }
@@ -30,7 +31,7 @@ public class DateUtil {
      * @param localDateTime 转成date
      * @return localDateTime
      */
-    public static Date dateByLdt (LocalDateTime localDateTime) {
+    private static Date dateByLdt(LocalDateTime localDateTime) {
         if (Objects.isNull(localDateTime)) {
             localDateTime = LocalDateTime.now();
         }
@@ -81,6 +82,27 @@ public class DateUtil {
         return Date.from(end.atZone(ZoneId.systemDefault()).toInstant());
     }
 
+    /**
+     * 获取某天最小时间 2019-01-24 00:00:00
+     * 支持jdk1.8+
+     * @param date 日期
+     * @return date
+     */
+    private static Date getStartOfDay(Date date) {
+        LocalDateTime localDateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(date.getTime()), ZoneId.systemDefault());
+        LocalDateTime startOfDay = localDateTime.with(LocalTime.MIN);
+        return Date.from(startOfDay.atZone(ZoneId.systemDefault()).toInstant());
+    }
+
+    /**
+     * 获得某天最大时间 2017-10-15 23:59:59
+     */
+    private static Date getEndOfDay(Date date) {
+        LocalDateTime localDateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(date.getTime()), ZoneId.systemDefault());
+        LocalDateTime endOfDay = localDateTime.with(LocalTime.MAX);
+        return Date.from(endOfDay.atZone(ZoneId.systemDefault()).toInstant());
+    }
+
     public static void main(String[] args) {
         Date date = new Date();
         LocalDateTime localDateTime = ldtByDate(date);
@@ -95,5 +117,9 @@ public class DateUtil {
         System.out.println(date3);
         System.out.println(date4);
         System.out.println(date5);
+        Date startOfDay = getStartOfDay(new Date());
+        System.out.println(startOfDay);
+        Date endOfDay = getEndOfDay(new Date());
+        System.out.println(endOfDay);
     }
 }

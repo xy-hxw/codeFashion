@@ -18,7 +18,8 @@ public class TestRunnable implements Runnable{
 
     public static void main(String[] args) {
         TestRunnable testRunnable = new TestRunnable();
-        testRunnable.run();
+        Thread thread = new Thread(testRunnable);
+        thread.start();
         System.out.println(num);
     }
 }

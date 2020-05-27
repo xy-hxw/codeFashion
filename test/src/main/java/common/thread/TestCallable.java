@@ -5,6 +5,7 @@ import common.thread.pool.TestThreadFactory;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
+import java.util.concurrent.FutureTask;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 /**
@@ -35,7 +36,14 @@ public class TestCallable implements Callable<Integer> {
         }
     }
 
+    private static void test1 () {
+        TestCallable testCallable = new TestCallable();
+        FutureTask<Integer> task = new FutureTask<>(testCallable);
+        new Thread(task).start();
+    }
+
     public static void main(String[] args) {
         test();
+        test1();
     }
 }
